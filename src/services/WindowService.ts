@@ -1,10 +1,10 @@
 import {remote} from "electron";
-import {Observable} from "rxjs/Observable";
+import {Observable, fromEvent, merge, pipe, NEVER } from "rxjs";
+import { map } from "rxjs/operators";
 import "rxjs/add/observable/fromEvent";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/do";
-import {NeverObservable} from "rxjs/observable/NeverObservable";
-import {Subject} from "rxjs/Subject";
+import {Subject} from "rxjs";
 
 export class WindowService {
     readonly onResize: Observable<{}>;
@@ -15,13 +15,19 @@ export class WindowService {
         if (remote) {
             const electronWindow = remote.BrowserWindow.getAllWindows()[0];
 
-            this.onResize = Observable.fromEvent(electronWindow, "resize")
-                .merge(Observable.fromEvent(electronWindow.webContents, "devtools-opened"))
-                .merge(Observable.fromEvent(electronWindow.webContents, "devtools-closed"));
+            this.onResize = merge([
+                fromEvent(electronWindow, "resize"),
+                fromEvent(electronWindow.webContents, "devtools-opened"),
+                fromEvent(electronWindow.webContents, "devtools-closed")
+            ]);
 
-            this.onBoundsChange = Observable.fromEvent(electronWindow, "move")
-                .merge(Observable.fromEvent(electronWindow, "resize"))
-                .map(() => electronWindow.getBounds());
+
+            this.onBoundsChange = merge(
+                fromEvent(electronWindow, "move"),
+                fromEvent(electronWindow, "resize")
+            ).pipe(
+                map(() => electronWindow.getBounds())
+            )
 
             window.onbeforeunload = () => {
                 electronWindow
@@ -34,8 +40,8 @@ export class WindowService {
                 this.onClose.next();
             };
         } else {
-            this.onResize = new NeverObservable();
-            this.onBoundsChange = new NeverObservable();
+            this.onResize = NEVER
+            this.onBoundsChange = NEVER
         }
     }
 }

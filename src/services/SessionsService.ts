@@ -1,7 +1,6 @@
 import {Session, SessionID} from "../shell/Session";
-import {Observable} from "rxjs/Observable";
-import {Subject} from "rxjs/Subject";
-import "rxjs/add/observable/fromEvent";
+import {Observable, fromEvent} from "rxjs";
+import {Subject} from "rxjs";
 import {services} from "./index";
 
 
@@ -13,11 +12,11 @@ export class SessionsService {
         const session = new Session();
         this.sessions.set(session.id, session);
 
-        Observable.fromEvent(session, "job-started").subscribe(
+        fromEvent(session, "job-started").subscribe(
             () => services.jobs.onStart.next(session.lastJob!),
         );
 
-        Observable.fromEvent(session, "job-finished").subscribe(
+        fromEvent(session, "job-finished").subscribe(
             () => services.jobs.onFinish.next(session.lastJob!),
         );
 

@@ -1,5 +1,5 @@
-import {Observable} from "rxjs/Observable";
-import {BehaviorSubject} from "rxjs/BehaviorSubject";
+import {Observable} from "rxjs";
+import {BehaviorSubject} from "rxjs";
 import "rxjs/add/observable/timer";
 import "rxjs/add/operator/concatMap";
 import "rxjs/add/operator/filter";
