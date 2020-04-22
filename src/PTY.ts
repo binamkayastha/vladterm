@@ -24,7 +24,7 @@ export class PTY {
         info(`PTY: ${loginShell.executableName} ${JSON.stringify(shellArguments)}`);
         info(`Dimensions: ${JSON.stringify(dimensions)}}`);
 
-        this.terminal = <any> pty.fork(loginShell.executableName, shellArguments, {
+        this.terminal = <any> pty.spawn(loginShell.executableName, shellArguments, {
             cols: dimensions.columns,
             rows: dimensions.rows,
             cwd: env.PWD,

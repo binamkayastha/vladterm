@@ -37,7 +37,7 @@
     "monaco-editor": "vlad-shatskyi/monaco-editor",
     "node-ansiparser": "2.2.0",
     "node-pty": "0.9.0",
-    "react": "16.2.0",
+    "react": "16.13.1",
     "react-dom": "16.13.1",
     "rxjs": "5.5.8",
     "tinycolor2": "1.4.1"
@@ -53,7 +53,7 @@
     "@types/klaw": "2.1.1",
     "@types/lodash": "4.14.116",
     "@types/mocha": "5.2.0",
-    "@types/node": "9.6.1",
+    "@types/node": "13.13.2",
     "@types/react": "16.1.0",
     "@types/webdriverio": "4.10.1",
     "chai": "4.1.2",
@@ -61,7 +61,7 @@
     "cpx": "1.5.0",
     "cross-env": "5.1.4",
     "devtron": "1.4.0",
-    "electron": "2.0.10",
+    "electron": "8.2.3",
     "electron-builder": "20.28.4",
     "electron-mocha": "6.0.4",
     "enzyme": "3.3.0",
@@ -73,7 +73,7 @@
     "spectron": "3.8.0",
     "ts-node": "5.0.1",
     "tslint": "5.9.1",
-    "typescript": "2.8.1"
+    "typescript": "3.8.3"
   },
   "scripts": {
     "preinstall": "npm prune",
