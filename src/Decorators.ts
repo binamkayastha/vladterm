@@ -13,7 +13,9 @@ export function memoize(resolver: ((...args: any[]) => any) | undefined = undefi
 }
 
 export const memoizeAccessor = <T>(_target: Object, name: string | symbol, descriptor: TypedPropertyDescriptor<T>) => {
-    const memoizedPropertyName = `__memoized_${name}`;
+    // Force nameStr to be string in case name is a symbol
+    const nameStr = name.toString()
+    const memoizedPropertyName = `__memoized_${nameStr}`;
     const originalGetter = descriptor.get;
 
     descriptor.get = function (this: any) {

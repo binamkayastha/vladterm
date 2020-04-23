@@ -12,7 +12,9 @@ const buttonStyles = (color: string) => ({
   fontSize: "10px",
   margin: "4px",
   cursor: "pointer",
-});
+} as React.CSSProperties);
+// Need this typing due to issue mentioned below
+// https://github.com/microsoft/TypeScript/issues/11465#issuecomment-252453037
 
 type ButtonProps = {
   onClick: () => void;

@@ -8,7 +8,9 @@ app.on("ready", () => {
     let options: Electron.BrowserWindowConstructorOptions = {
         webPreferences: {
             experimentalFeatures: true,
-            experimentalCanvasFeatures: true,
+            // https://chromium-review.googlesource.com/c/chromium/src/+/957646
+            // Canvas features are now implement and are no longer experimental
+            // experimentalCanvasFeatures: true,
         },
         titleBarStyle: "hidden",
         resizable: true,

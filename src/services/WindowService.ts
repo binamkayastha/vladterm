@@ -1,7 +1,6 @@
 import {remote} from "electron";
 import {Observable, fromEvent, merge, pipe, NEVER } from "rxjs";
 import { map } from "rxjs/operators";
-import "rxjs/add/observable/fromEvent";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/do";
 import {Subject} from "rxjs";
