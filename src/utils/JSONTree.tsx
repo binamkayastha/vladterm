@@ -25,7 +25,7 @@ const childrenCount = {
     WebkitUserSelect: "none",
     userSelect: "none",
     cursor: "default",
-};
+} as React.CSSProperties;
 
 type JSONProps = {
     data: any,

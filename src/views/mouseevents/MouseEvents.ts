@@ -17,7 +17,7 @@ export function handleMouseEvent(application: ApplicationComponent, event: Mouse
     const isJobRunning = sessionComponent.status === Status.InProgress;
     const promptComponent = sessionComponent.promptComponent;
 
-    if (event instanceof DragEvent) {
+    if (event instanceof DragEvent && event.dataTransfer) {
         const path = event.dataTransfer.files[0].path;
         let formattedPath = userFriendlyPath(escapeFilePath(path));
 

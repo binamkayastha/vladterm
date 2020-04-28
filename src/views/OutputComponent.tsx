@@ -63,7 +63,7 @@ export class OutputComponent extends React.Component<Props, {}> {
                         "--scrollback-size": buffer.scrollbackSize,
                         "--row-index": buffer.cursorRowIndex,
                         "--column-index": buffer.cursorColumnIndex,
-                    }}/>
+                    } as React.CSSProperties}/>
             : undefined;
 
         const rowComponents = buffer.map(row => <RowComponent key={row.hashCode()} row={row}/>);

@@ -1,4 +1,4 @@
-import {app, ipcMain, nativeImage, BrowserWindow, screen} from "electron";
+import {app, ipcMain, nativeImage, BrowserWindow, screen} from "electron"
 import {readFileSync} from "fs";
 import {windowBoundsFilePath} from "../utils/Common";
 
@@ -8,22 +8,22 @@ app.on("ready", () => {
     let options: Electron.BrowserWindowConstructorOptions = {
         webPreferences: {
             experimentalFeatures: true,
-            // https://chromium-review.googlesource.com/c/chromium/src/+/957646
-            // Canvas features are now implement and are no longer experimental
-            // experimentalCanvasFeatures: true,
+            nodeIntegration: true
         },
         titleBarStyle: "hidden",
-        resizable: true,
         minWidth: 500,
         minHeight: 300,
         width: bounds.width,
         height: bounds.height,
         x: bounds.x,
         y: bounds.y,
-        show: false,
-    };
-    const browserWindow = new BrowserWindow(options);
+        show: false, // Prevents white page from showing up
+        backgroundColor: '#072938', // Background color to show while window is loading
+    }
 
+    const browserWindow = new BrowserWindow(options)
+
+    // app.dock is the mac dock
     if (app.dock) {
         app.dock.setIcon(nativeImage.createFromPath("build/icon.png"));
     } else {
@@ -32,9 +32,12 @@ app.on("ready", () => {
 
     browserWindow.loadURL("file://" + __dirname + "/../views/index.html");
 
+    // This is supposed to prevent the app from showing until everything is loaded
+    // and prevent the white page flash in the beginning. Doesn't seem to work on linux
+    // at least
     browserWindow.webContents.on("did-finish-load", () => {
-        browserWindow.show();
-        browserWindow.focus();
+      browserWindow.show();
+      browserWindow.focus();
     });
 
     app.on("open-file", (_event, file) => browserWindow.webContents.send("change-working-directory", file));

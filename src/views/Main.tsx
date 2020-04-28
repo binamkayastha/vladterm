@@ -1,3 +1,4 @@
+
 import {handleUserEvent} from "./keyevents/Keybindings";
 import {handleMouseEvent} from "./mouseevents/MouseEvents";
 
@@ -34,6 +35,7 @@ async function main() {
     require("../monaco/ShellLanguage");
     require("../monaco/ShellHistoryLanguage");
 
+
     // FIXME: Remove loadAllPlugins after switching to Webpack (because all the files will be loaded at start anyway).
     await Promise.all([loadAllPlugins(), loadEnvironment(), loadAliasesFromConfig()]);
     const application: ApplicationComponent = reactDOM.render(
@@ -42,6 +44,7 @@ async function main() {
     );
 
     const template = buildMenuTemplate(remote.app, browserWindow, application);
+
     remote.Menu.setApplicationMenu(remote.Menu.buildFromTemplate(template));
 
     const userEventHandler = (event: UserEvent) => handleUserEvent(
@@ -65,6 +68,7 @@ async function main() {
     require("../plugins/SaveWindowBounds");
     require("../plugins/AliasSuggestions");
 }
+
 
 if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", main, false);

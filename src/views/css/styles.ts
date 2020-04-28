@@ -27,7 +27,7 @@ export const application = () => ({
     "--blue-color": colors.blue,
     "--magenta-color": colors.magenta,
     "--cyan-color": colors.cyan,
-});
+} as React.CSSProperties);
 
 export const charGroup = (attributes: Attributes) => {
     const styles: any = {

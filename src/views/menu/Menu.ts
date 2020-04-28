@@ -16,7 +16,7 @@ export function buildMenuTemplate(
                 { role: "about" },
                 { type: "separator" },
                 { role: "hide" },
-                { role: "hideothers" },
+                { role: "hideOthers" },
                 { role: "unhide" },
                 { type: "separator" },
                 {

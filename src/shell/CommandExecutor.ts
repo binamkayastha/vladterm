@@ -25,7 +25,7 @@ class BuiltInCommandExecutionStrategy extends CommandExecutionStrategy {
     }
 
     startExecution() {
-        return new Promise((resolve, reject) => {
+        return new Promise<{}>((resolve, reject) => {
             try {
                 Command.executor(this.job.prompt.commandName)(this.job, this.job.prompt.arguments.map(token => token.value));
                 resolve();
@@ -57,7 +57,7 @@ class ShellExecutionStrategy extends CommandExecutionStrategy {
     }
 
     startExecution() {
-        return new Promise((resolve, reject) => {
+        return new Promise<{}>((resolve, reject) => {
             this.job.setPty(new PTY(
                 this.job.prompt.expandedTokens.map(token => token.escapedValue),
                 this.job.environment.toObject(),
@@ -75,7 +75,7 @@ class WindowsShellExecutionStrategy extends CommandExecutionStrategy {
     }
 
     startExecution() {
-        return new Promise((resolve) => {
+        return new Promise<{}>((resolve) => {
             this.job.setPty(new PTY(
                 [
                     this.cmdPath,

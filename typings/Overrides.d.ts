@@ -1,8 +1,8 @@
 interface IntersectionObserverEntry {
     readonly time: number;
-    readonly rootBounds: ClientRect | DOMRect;
-    readonly boundingClientRect: ClientRect | DOMRect;
-    readonly intersectionRect: ClientRect | DOMRect;
+    readonly rootBounds: DOMRectReadOnly | null;
+    readonly boundingClientRect: DOMRectReadOnly;
+    readonly intersectionRect: DOMRectReadOnly;
     readonly intersectionRatio: number;
     readonly target: Element;
 }

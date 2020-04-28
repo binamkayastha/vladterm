@@ -14,16 +14,30 @@ export function setCaretPosition(node: Node, position: number) {
         range.setStart(node, 0);
     }
     range.collapse(true);
-    selection.removeAllRanges();
-    selection.addRange(range);
+    if(selection) {
+      selection.removeAllRanges();
+      selection.addRange(range);
+    }
 }
 
 /**
  * @link http://stackoverflow.com/questions/4811822/get-a-ranges-start-and-end-offsets-relative-to-its-parent-container/4812022#4812022
  */
 export function getCaretPosition(element: Node): number {
+    if(
+      !(element
+        && element.ownerDocument
+        && element.ownerDocument.defaultView
+        && element.ownerDocument.defaultView.getSelection())
+    ) {
+      return 0;
+    }
+
     const selection = element.ownerDocument.defaultView.getSelection();
 
+    if (!selection) {
+      return 0;
+    }
     if (selection.rangeCount > 0) {
         const range = selection.getRangeAt(0);
         const preCaretRange = range.cloneRange();
